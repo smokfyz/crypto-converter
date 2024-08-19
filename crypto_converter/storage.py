@@ -1,4 +1,5 @@
 import abc
+import contextlib
 from datetime import datetime
 from decimal import Decimal
 
@@ -52,7 +53,9 @@ class PostgreSQLStorage(Storage):
                 PRIMARY KEY (timestamp, symbol)
             )
         """
-        await self.db.execute(query=query)
+        # TODO: use migrations to create table
+        with contextlib.suppress(Exception):
+            await self.db.execute(query=query)
 
     async def connect(self) -> None:
         await self.db.connect()

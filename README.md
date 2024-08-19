@@ -17,7 +17,7 @@ Crypto Converter is a  web service that converts the amount of one cryptocurrenc
 * amount - amount of source currency. Default precision is 6 decimal places. If number of decimal places in amount is greater than 6 (can be configured using AMOUNT_PRECISION env variable), the service will round using round half to even algorithm.
 * from - source currency (e.g. BTC)
 * to - target currency (e.g. USDT)
-* [Optional] timestamp - timestamp in seconds (default: current timestamp). If timestamp is provided, the service will use the quote for nearest timestamp that smaller or equal than provided with respect to NO_OLDER_THAN_SECONDS parameters.
+* [Optional] timestamp - timestamp in seconds (default: current timestamp). If timestamp is provided, the service will use the quote for nearest timestamp that smaller or equal to provided with respect to NO_OLDER_THAN_SECONDS parameters.
 
 #### Errors
 
