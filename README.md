@@ -40,9 +40,34 @@ curl --location 'http://127.0.0.1:8000/convert?amount=1&from=BTC&to=USDT'
 
 ## Configuration
 
-You can configure service using enviroment variables or `.env` file. You can see all available parameters in `run.py` file.
+You can configure the service using environment variables or `.env` file.
 
-## Run all
+All available environment variables:
+
+### Common
+* LOG_LEVEL - log level (default: INFO)
+* POSTGRES_HOST - host of the postgresql server (default: localhost)
+* POSTGRES_PORT - port of the postgresql server (default: 5432)
+* POSTGRES_USER - user of the postgresql server (default: postgres)
+* POSTGRES_PASSWORD - password of the postgresql server (default: postgres)
+* POSTGRES_DB - database name on the postgresql server (default: quotes)
+
+### API service
+* HOST - host of the service (default: localhost)
+* SERVER_PORT - port of the service (default: 8000)
+* ENABLE_HOT_RELOAD - enable hot reload (default: 0)
+* NUM_WORKERS - number of workers (default: 2)
+* AMOUNT_PRECISION - amount precision (default: 6)
+* NO_OLDER_THAN_SECONDS - if all available quotes for timestamp older than this parameter than service will return error
+
+### Consumer
+* CONVERSION_RATE_PRECISION - conversion rate precision (default: 12)
+* SAVE_PERIOD_SECONDS - quotes consume period in seconds (default: 30)
+* CLEANUP_PERIOD_SECONDS - cleanup period in seconds (default: 600)
+* CLEANUP_OLDER_THAN_SECONDS - cleanup older than seconds (default: 604800 (7 days))
+* CONSUMER_SUBSCRIBTION_TYPE - consumer subscription type: http or ws (default: http)
+
+## Run with docker-compose
 1. Clone repository
 2. Run docker-compose
 ```
