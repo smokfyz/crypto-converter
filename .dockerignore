@@ -1,0 +1,6 @@
+*
+
+!crypto_converter/
+!poetry.lock
+!pyproject.toml
+!run.py

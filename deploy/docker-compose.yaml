@@ -1,0 +1,37 @@
+services:
+  api:
+    build: ../
+    command: poetry run python run.py api
+    environment:
+      - HOST=0.0.0.0
+      - POSTGRES_HOST=db
+      - LOG_LEVEL=INFO
+    ports:
+      - 8000:8000
+    depends_on:
+      db:
+        condition: service_healthy
+  consumer:
+    build: ../
+    command: poetry run python run.py quotes-consumer
+    environment:
+      - POSTGRES_HOST=db
+      - LOG_LEVEL=INFO
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: quotes
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ../database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 5432:5432
